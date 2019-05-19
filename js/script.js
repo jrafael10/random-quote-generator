@@ -5,7 +5,7 @@ project 1 - A Random Quote Generator
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
-
+/* */
 
 
 //An array of quote objects with properties: quote, source, citation, year, color, and tags
@@ -75,43 +75,25 @@ function printQuote() {
     var citation = ' <span class="citation"> ' +quote.citation +' </span>';
     var year = '  <span class="year"> ' +quote.year +'</span>';
 
+    //html templates for quote and source properties
+    html += '<p class="quote"> '+quote.quote +'</p>\n';
+    html+=    '<p class="source"> ' + quote.source  + '\n';
 
-    //if the quote object does not have the citation and year properties,
-    //only display the quote, source, and the tags properties
-    if(quote.citation === undefined && quote.year === undefined ){
-        html += '<p class="quote"> '+quote.quote +'</p>\n' +
-            '<p class="source"> ' + quote.source  + '\n' +
-            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n'+
-            '</p>';
+    //if citation property exists, then display it
+    if(quote.citation){
+        html += citation;
 
-        //If the quote object doesn't have the citation property,
-        //only display the quote, source, year, and the tags properties
-    } else if(quote.citation === undefined) {
-
-        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
-            '<p class="source"> ' + quote.source + '\n' +
-              year +'\n' +
-            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n' +
-            '</p>';
-
-        //If the quote object doesn't have the year property,
-        //only display the quote, source, citation, and the tags properties
-    } else if(quote.year === undefined){
-        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
-            '<p class="source"> ' + quote.source + '\n' +
-             citation +'\n' +
-            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n'+
-            '</p>';
     }
-    //if the quote object has all the properties, then display them except the color properties.
-    else {
-        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
-            '<p class="source"> ' + quote.source + '\n' +
-             citation +'\n' +
-             year +'\n' +
-            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n' +
-            '</p>';
+    //if the year property exists, then display it
+    if(quote.year){
+        html += year;
+
     }
+    //html template for tags property
+    html+='<span class = "tags"> ' + ", " +quote.tags + '</span>\n';
+    //closing tag for source
+    html += '</p>';
+
     //Handles the background color of the button that generates the quote.
 
     document.getElementById('loadQuote').style.backgroundColor = quote.color;
@@ -128,6 +110,8 @@ window.setInterval(printQuote, 30000);
 
 //When "Show another quote" button is clicked, the quote object and its properties will be displayed
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+
+
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
