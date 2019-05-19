@@ -6,50 +6,127 @@ project 1 - A Random Quote Generator
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
 
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
+
+
+//An array of quote objects with properties: quote, source, citation, year, color, and tags
+    //SOme of them don't have the year and citation properties.
+var quotes = [{quote: "It doesn’t matter how slow you go, as long as you don’t stop.",
+                source: "Confucius",
+                citation: "Analects",
+                year: "500 BC",
+                color: '#ff9966',
+                tags: "Philosophy"
+                },
+               {quote: "Success is the sum of small efforts, repeated day-in and day-out.",
+                   source: "Robert Collier",
+                   citation: "The Book of Life",
+                   year: 1925,
+                   color: "#666633",
+                   tags: "Personal Development"
+               },
+            {quote: "The meaning of life is to find your gift. The purpose of life is to give it away.",
+                source: "Anonymous",
+                 year: 2010,
+                color: "#3333cc",
+                 tags: "Philosophy"   },
+            {quote:"You’ve got to get up every morning with determination if you’re going to go to bed with satisfaction.",
+                source: "George Lorimer",
+                color: "#996600",
+                tags: "Motivational quote"
+            },
+            {quote: "Choose to be optimistic, it feels better.",
+                source: "Dalai Lama",
+                citation: "Goodreads",
+                color: "#993399",
+                tags: "Personal Development"},
+            {quote: "Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.",
+            source: "Patrick McKenzie",
+            citation: "Twitter",
+            year: 2016,
+            color:  "#36b55c",
+            tags: "Technology"}];
 
 
 
 
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
 
 
 
 
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
+
+//function that generates random number and returns a quote object randomly
+function getRadomQuote() {
+    var randomNum = Math.floor(Math.random() * quotes.length);
+    return quotes[randomNum];
+}
 
 
 
 
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
 
+//function that prints the quote, its source, citation, year, color, and category
+function printQuote() {
+    //Retrieving the quote
+    var quote = getRadomQuote();
+    //variable that stores the html template in the form of string
+    var html = '';
+
+    //html templates for the citation and year
+    var citation = ' <span class="citation"> ' +quote.citation +' </span>';
+    var year = '  <span class="year"> ' +quote.year +'</span>';
+
+
+    //if the quote object does not have the citation and year properties,
+    //only display the quote, source, and the tags properties
+    if(quote.citation === undefined && quote.year === undefined ){
+        html += '<p class="quote"> '+quote.quote +'</p>\n' +
+            '<p class="source"> ' + quote.source  + '\n' +
+            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n'+
+            '</p>';
+
+        //If the quote object doesn't have the citation property,
+        //only display the quote, source, year, and the tags properties
+    } else if(quote.citation === undefined) {
+
+        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
+            '<p class="source"> ' + quote.source + '\n' +
+              year +'\n' +
+            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n' +
+            '</p>';
+
+        //If the quote object doesn't have the year property,
+        //only display the quote, source, citation, and the tags properties
+    } else if(quote.year === undefined){
+        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
+            '<p class="source"> ' + quote.source + '\n' +
+             citation +'\n' +
+            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n'+
+            '</p>';
+    }
+    //if the quote object has all the properties, then display them except the color properties.
+    else {
+        html += '<p class="quote"> ' + quote.quote + '</p>\n' +
+            '<p class="source"> ' + quote.source + '\n' +
+             citation +'\n' +
+             year +'\n' +
+            '<span class = "tags"> ' + ", " +quote.tags + '</span>\n' +
+            '</p>';
+    }
+    //Handles the background color of the button that generates the quote.
+
+    document.getElementById('loadQuote').style.backgroundColor = quote.color;
+    //Handle the background color of each quote
+    document.body.style.backgroundColor = quote.color;
+    //Displaying the html template on the browser
+    document.getElementById('quote-box').innerHTML = html;
+}
+
+
+//New quote will be displayed every 30 seconds
+window.setInterval(printQuote, 30000);
+
+
+//When "Show another quote" button is clicked, the quote object and its properties will be displayed
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
 
