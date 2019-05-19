@@ -1,11 +1,12 @@
 /******************************************
-Treehouse FSJS Techdegree:
+Treehouse FSJS Techdegree:his
 project 1 - A Random Quote Generator
 ******************************************/
 
 // Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
-/* */
+/*For this project, I'm going for the 'Exceeds Expectations', but I don't mind with a 'Meets
+* Expectation' grade */
 
 
 //An array of quote objects with properties: quote, source, citation, year, color, and tags
