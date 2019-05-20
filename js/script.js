@@ -67,6 +67,7 @@ function getRadomQuote() {
 
 //function that prints the quote, its source, citation, year, color, and category
 function printQuote() {
+
     //Retrieving the quote
     var quote = getRadomQuote();
     //variable that stores the html template in the form of string
@@ -102,11 +103,16 @@ function printQuote() {
     document.body.style.backgroundColor = quote.color;
     //Displaying the html template on the browser
     document.getElementById('quote-box').innerHTML = html;
+    //restarting the time
+    clearInterval(timer);
+    //changing quote every 10 seconds
+    timer = window.setInterval(printQuote, 30000);
 }
 
 
 //New quote will be displayed every 30 seconds
-window.setInterval(printQuote, 30000);
+var timer = window.setInterval(printQuote, 30000);
+
 
 
 //When "Show another quote" button is clicked, the quote object and its properties will be displayed
